@@ -2,43 +2,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/tags.jsp" %>
-<head>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<div class="container ">
-	<div class="row mb-3 ">
-		<div class="col text-center">
-			<h1>로그인</h1>
-			<h3>Login</h3>
+ <main id="main">
+  <div class="login-wrap">
+    <header class="login__header">
+      <h1 class="login__title">LOGIN</h1>
+      <p class="login__text">로그인</p>
+    </header>
+    <article class="login">
+      <c:if test="${not empty error }">
+		<div class="mb-3 alert alert-danger">
+			${error }
 		</div>
-	</div>
-	<div class="row mb-3 d-flex justify-content-center">
-		<div class="col-8">
-			<c:if test="${not empty error }">
-				<div class="mb-3 alert alert-danger">
-					${error }
-				</div>
-			</c:if>
-			<form class="border p-3 bg-light" method="post" action="login">
-				<div class="mb-3">
-					<label class="form-label">아이디</label>
-					<input type="text" class="form-control" name="id" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">비밀번호</label>
-					<input type="password" class="form-control" name="pwd" />
-				</div>
-				<div class="mb-3 text-end">
-					<a href="#" class="btn btn-secondary">회원가입</a>
-					<a href="#" class="btn btn-secondary">비밀번호찾기</a>
-					<button class="btn btn-primary">로그인</button>
-				</div>
-			</form>
-				<div class="mb-3 text-end">
-					<button class="btn btn-primary">카카오톡 로그인</button>
-				</div>
-		</div>
-	</div>
-</div>
+	  </c:if>
+      <form action="login" class="login-form" method="post">
+        <div class="form__wrap">
+          <div class="login__id">
+            <input
+              type="text"
+              class="form__id"
+              name="id"
+              placeholder="아이디"
+            />
+          </div>
+          <div class="login__pwd">
+            <input
+              type="password"
+              class="form__pwd"
+              name="pwd"
+              placeholder="비밀번호"
+            />
+          </div>
+        </div>
+        <div class="login__btn">
+          <button type="submit" class="btn__login">LOGIN</button>
+        </div>
+        <div class="login__etc">
+          <a href="" class="sign-in">회원가입</a
+          ><a href="" class="forgot-pwd">비밀번호 찾기</a>
+        </div>
+        <div class="login__sns">
+          <p class="sns__title">SNS 계정으로 로그인하기</p>
+          <div class="sns__login">
+            <a href="">
+              <img
+                src="../../resources/images/main/sns_kakao.png"
+                alt="kakao-icon"
+                class="sns__icon"
+            /></a>
+          </div>
+        </div>
+      </form>
+    </article>
+  </div>
+</main>
