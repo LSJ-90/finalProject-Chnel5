@@ -47,7 +47,7 @@
 	 	from
 	 		tb_final_users
 		where 
-			user_id = #{id}
+			user_id = #{value}
 	 </select>
 	 
 	 <!-- 이승준 
@@ -57,7 +57,7 @@
 		insert into tb_final_users
 			(user_no, user_id, user_name, user_pwd, user_tel, user_email, user_gender)
 		values
-			(final_user_no_seq, #{id}, #{name}, #{pwd}, #{tel}, #{email}, #{gender})
+			(final_user_no_seq.nextval, #{id}, #{name}, #{pwd}, #{tel}, #{email}, #{gender})
 	</insert>
 	
 	<!-- 이승준 

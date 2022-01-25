@@ -1,4 +1,5 @@
 <!-- 이승준: 부트스트랩을 이용한 데모뷰, 디자인 적용 시 삭제 될 것-->
+<!-- 이승준: ID값 적용된 변수=> userId,check_id, userPwd,userPwdConfirm,check_pwd,check_pwdConfirm -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/tags.jsp" %>
@@ -19,7 +20,7 @@
 				var $pwd = $(this).val();
 				if (!(pwdRegex.test($pwd))) {
 					$("#check_pwd").html("8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합하여 8~16자리까지만 가능합니다!!  :(").css("color", "red");
-					$("#registerBtn").attr("disabled", true);
+					// $("#registerBtn").attr("disabled", true);
 				} else {
 					$("#check_pwd").html("사용가능한 비밀번호 입니다!!  :)").css("color", "green");
 				}
@@ -73,7 +74,7 @@
 		
 			// 아이디 유효성 체크
 			$("#userId").blur(function() {
-				var id = $("#userId").val();
+				var id = $(this).val();
 				
 				$.ajax({
 					url : "/register/checkId",
@@ -86,7 +87,7 @@
 							// 1 : 중복
 							$("#check_id").text("사용중인 아이디입니다!!  :(");
 							$("#check_id").css("color", "red");
-							$("#registerBtn").attr("disabled", true);
+							// $("#registerBtn").attr("disabled", true);
 						} else {
 							
 							// 0 : 정상, 형식검사 시작
@@ -96,10 +97,11 @@
 							} else if (id == "") {
 								$("#check_id").text("아이디를 입력해주세요!!  :(");
 								$("#check_id").css("color", "red");
-								$("#registerBtn").attr("disabled", true);
+								// $("#registerBtn").attr("disabled", true);
 							} else if (!(idRegex.test(id))) {
 								$("#check_id").text("아이디는 영문으로 시작하여, 소문자와 숫자를 사용해 6~12자리까지만 가능합니다!! :(");
-								$("#registerBtn").attr("disabled", true);
+								$("#check_id").css("color", "red");
+								// $("#registerBtn").attr("disabled", true);
 							}
 						}
 								
@@ -129,7 +131,6 @@
     			</div>
     		</c:if>
     		--%>
-    		
     		<form class="border p-3 bg-light" method="post" action="register">
     			<div class="mb-3">
     				<label class="form-label">아이디</label>
@@ -138,7 +139,7 @@
     			</div>
     			<div class="mb-3">
     				<label class="form-label">비밀번호</label>
-    				<input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="비밀번호를 입력하세요." required/>
+    				<input type="password" class="form-control" id="userPwd" name="pwd" placeholder="비밀번호를 입력하세요." required/>
     				<div class="" id="check_pwd"></div>
     			</div>
     			<div class="mb-3">
@@ -148,7 +149,7 @@
     			</div>
     			<div class="mb-3">
     				<label class="form-label">이름</label>
-    				<input type="text" class="form-control" name="userName">
+    				<input type="text" class="form-control" name="name">
     			</div>
     			<div class="mb-3">
     				<label class="form-label">전화번호</label>
@@ -205,7 +206,7 @@
 				  </label>
 				</div>
 				<div class="mb-1 text-end">
-    				<input type="submit" id="registerBtn" class="" disabled value="회원가입"/>
+    				<input type="submit" id="registerBtn" class=""  value="회원가입"/> <!-- disabled -->  
     			</div>
     		</form>
     	</div>

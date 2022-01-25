@@ -23,7 +23,7 @@ public interface UserMapper {
 	User getUserById(String id);
 	
 	// 이승준 회원가입을 위한 메소드이다.
-	void insertUser(User user);
+	void insertUser(User newUser);
 	
 	// 이승준 아이디 중복여부체크
 	int userCheckByid(String id);

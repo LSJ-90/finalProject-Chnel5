@@ -2,11 +2,12 @@ package com.hoge.service;
 
 import java.util.List;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.hoge.exception.LoginException;
-import com.hoge.exception.RegisterException;
 import com.hoge.form.CriteriaAdminUser;
 import com.hoge.mapper.UserMapper;
 import com.hoge.vo.other.User;
@@ -30,6 +31,10 @@ public class UserService {
 	// 이승준 로그인페이지
 	public User login(String id, String pwd) {
 		
+		if (!StringUtils.hasText(id) || !StringUtils.hasText(pwd)) {
+			throw new LoginException("<strong>아이디</strong> 또는 <strong>비밀번호</strong>를 입력하지 않았습니다.");
+		}
+		
 		User savedUser = userMapper.getUserById(id);		
 		
 		if (savedUser == null) {
@@ -40,10 +45,20 @@ public class UserService {
 			throw new LoginException("탈퇴처리된 아이디입니다. 재가입해주세요.");
 		}
 		
-		if (!pwd.equals(savedUser.getPwd())) {
+		String authPwd = DigestUtils.sha512Hex(pwd);
+		if (!authPwd.equals(savedUser.getPwd())) {
 			throw new LoginException("비밀번호가 일치하지 않습니다.");
 		}
 		
+		return savedUser;
+	}
+	
+	// 이승준: 카카오톡 로그인
+	public User loginKakao(User kakaoUser) {
+		User savedUser = userMapper.getUserById(kakaoUser.getId());
+		if (savedUser == null) {
+			userMapper.insertUser(kakaoUser);
+		}
 		return savedUser;
 	}
 	

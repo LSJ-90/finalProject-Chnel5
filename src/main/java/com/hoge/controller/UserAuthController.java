@@ -1,18 +1,20 @@
 package com.hoge.controller;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hoge.dto.UserDto;
-import com.hoge.exception.LoginException;
+import com.hoge.dto.HogeUserDto;
+import com.hoge.dto.KakaoUserDto;
 import com.hoge.service.UserService;
 import com.hoge.util.SessionUtils;
 import com.hoge.vo.other.User;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 사용자 을 위한 컨트롤러
@@ -20,6 +22,7 @@ import com.hoge.vo.other.User;
  *
  */
 @Controller
+@Slf4j
 public class UserAuthController {
 	
 	@Autowired
@@ -35,14 +38,11 @@ public class UserAuthController {
 	// 이승준: 로그인 성공 시 홈 페이지로 리다이렉트(관리자일 경우 관리자페이지 메인으로 리다이렉트)
 	@PostMapping("/login")
 	public String login(String id, String pwd) {
-		if (!StringUtils.hasText(id) || !StringUtils.hasText(pwd)) {
-			throw new LoginException("<strong>아이디</strong> 또는 <strong>비밀번호</strong>를 입력하지 않았습니다.");
-		}		
 		
 		User savedUser = userService.login(id, pwd);
 		SessionUtils.addAttribute("LOGIN_USER", savedUser);
 		
-		if ("hong".equals(savedUser.getId())) {
+		if ("admin01".equals(savedUser.getId()) || "admin02".equals(savedUser.getId())) {
 			return "redirect:admin/main";
 		}
 		
@@ -66,10 +66,10 @@ public class UserAuthController {
 	
 	// 이승준: 회원가입 
 	@PostMapping("/register")
-	public String register(UserDto user) {
+	public String register(HogeUserDto user) {
 		User newUser = User.builder()
 				.id(user.getId())
-				.pwd(user.getPwd())
+				.pwd(DigestUtils.sha512Hex(user.getPwd()))
 				.name(user.getName())
 				.tel(user.getTel())
 				.email(user.getEmail())
@@ -82,12 +82,34 @@ public class UserAuthController {
 		return "redirect:home";
 	}
 	
+	// 이승준: 카카오톡 로그인
+	@PostMapping("/loginKakao")
+	public String loginKakao(KakaoUserDto kakaoUser) {
+		
+		log.info("카카오 로그인 인증정보 : " + kakaoUser );
+		
+		User user = User.builder()
+					.id(kakaoUser.getId())
+					.name(kakaoUser.getName())
+					.email(kakaoUser.getEmail())
+					.gender(kakaoUser.getGender())
+					.build();
+		
+		User savedUser = userService.loginKakao(user);
+		
+		if (savedUser != null) {
+			SessionUtils.addAttribute("LOGIN_USER", savedUser);
+		} else {
+			SessionUtils.addAttribute("LOGIN_USER", user);
+		}
+		
+		return "redirect:home";
+	}
 	
 	// 이승준: 로그아웃 시 홈 페이지로 리다이렉트
 	@GetMapping("/logout")
 	public String logout() {
-		SessionUtils.removeAttribute("LOGIN_USER");
-		
+		SessionUtils.sessionInvlidate();
 		return "redirect:home";
 	}
 }

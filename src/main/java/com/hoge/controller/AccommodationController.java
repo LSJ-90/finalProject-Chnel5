@@ -44,6 +44,6 @@ public class AccommodationController {
 		model.addAttribute("accommos", accommoListDtos);
 		model.addAttribute("pagination", pagination);
 		
-		return "accommo/list";
+		return "accommo/list.tiles";
 	}
 }

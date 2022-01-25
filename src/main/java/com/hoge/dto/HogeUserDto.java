@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class UserDto {
+public class HogeUserDto {
 
 	private String id;
 	private String name;
