@@ -33,6 +33,11 @@
           </li>
           <li class="my-stay__item"><a href="">관심 스테이</a></li>
           <li class="my-stay__item"><a href="">다녀온 스테이</a></li>
+          <li class="my-stay__item">
+            <a href=""
+              ><img src="../../resources/images/main/chat_icon.png" alt="" class="chat-icon"
+            /></a>
+          </li>
         </ul>
         <ul class="menu__my-info">
           <li class="my-info__item title">내 계정</li>

@@ -4,9 +4,9 @@
 <%@ include file="../common/tags.jsp" %>
  <main id="main">
   <div class="login-wrap">
-    <header class="login__header">
-      <h1 class="login__title">LOGIN</h1>
-      <p class="login__text">로그인</p>
+    <header class="section__header">
+      <h1 class="section__title">LOGIN</h1>
+      <p class="section__text">로그인</p>
     </header>
     <article class="login">
       <c:if test="${not empty error }">

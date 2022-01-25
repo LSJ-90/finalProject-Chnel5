@@ -257,6 +257,11 @@ input::placeholder {
 .my-stay__item a.active {
 }
 
+.chat-icon {
+  width: 40px;
+  height: 40px;
+}
+
 .content__menu {
   display: flex;
 }
