@@ -7,6 +7,7 @@
   --color-input-gray: #dddddd;
   --color-faq-text-gray: #888888;
   --color-form-gray: #bbbbbb;
+  --color-text-gray: #999999;
   --color-form-text: #676767;
   --color-text-black: #333333;
   --color-title-black: #181818;
@@ -97,64 +98,191 @@ input::placeholder {
 }
 
 .header-wrap {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
   margin: 0 auto;
   border-bottom: 1px solid var(--color-header-gray);
   max-width: 1400px;
 }
 
-.header__title {
-  padding: 35px 0;
+.logo {
+  width: 86px;
+  height: 36px;
 }
 
-.title {
-  font-family: var(--font-family-mix);
+.search__stay,
+.search__activity {
+  font-family: var(--font-family-lato);
   font-weight: var(--weight-regular);
-  font-size: 18px;
-}
-
-.text {
   font-size: 15px;
-  font-weight: var(--weight-light);
-  margin-top: 10px;
+  padding: 0;
 }
 
-#nav {
-  position: relative;
+.search__stay::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 15px;
+  margin: 0 23px 0 25px;
+  background: var(--color-faq-text-gray);
+  vertical-align: middle;
 }
 
 .nav__menu {
   display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+  font-family: var(--font-family-lato);
+  font-weight: var(--weight-bold);
+  font-size: 15px;
 }
 
 .nav__item {
-  padding: 8px 0;
-  margin: 0 35px;
-}
-
-.nav__item a {
-  font-weight: var(--weight-thin);
-  font-size: 18px;
-  padding: 5px 0;
+  margin-left: 25px;
   color: var(--color-black);
 }
 
-.nav__item a.active {
-  font-weight: var(--weight-medium);
-  border-bottom: 3px solid var(--color-black);
-}
-.nav__dropdown {
-  position: absolute;
-  right: 0;
-  bottom: 6px;
+.nav__item:first-child {
+  border-right: 1px solid var(--color-borderline-gray);
+  padding-right: 25px;
 }
 
-.dropdown__image,
-.dropdown__image.active {
-  width: 25px;
-  height: 25px;
+.nav__item a {
+  color: var(--color-black);
+}
+
+/* Mypage-main */
+#main {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 1400px;
+}
+
+.section__header {
+  margin: 70px 0;
+}
+
+.section__title {
+  font-family: var(--font-family-lato);
+  font-weight: var(--weight-bold);
+  font-size: 18px;
+  letter-spacing: 14px;
+  text-indent: 14px;
+}
+
+.section__text {
+  font-size: 15px;
+  font-weight: var(--weight-regular);
+  margin-top: 10px;
+  text-align: center;
+}
+
+.mypage {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.mypage__info {
+  padding-bottom: 60px;
+}
+
+.info__title {
+  font-size: 30px;
+  font-weight: var(--weight-medium);
+}
+
+.info__count {
+  font-size: 18px;
+  font-weight: var(--weight-light);
+  color: var(--color-text-gray);
+  margin-top: 20px;
+}
+
+.host {
+  text-align: right;
+  vertical-align: middle;
+  margin: 5px 0;
+}
+
+.host a {
+  font-size: 18px;
+  font-weight: var(--weight-light);
+  color: var(--color-text-black);
+}
+
+.host__icon {
+  margin-right: 3px;
+  width: 15px;
+  height: 15px;
+}
+
+.mypage-wrap {
+  display: flex;
+  padding-top: 60px;
+  border-top: 3px solid var(--color-black);
+}
+
+.mypage__menu {
+  flex-basis: 20%;
+}
+
+.mypage__content {
+  flex-basis: 80%;
+}
+
+.menu__my-stay {
+  margin-bottom: 50px;
+}
+
+.menu__my-stay,
+.menu__my-info {
+  font-size: 14px;
+  font-weight: var(--weight-light);
+  line-height: 38px;
+  text-align: left;
+  color: var(--color-title-black);
+}
+
+.menu__my-stay a,
+.menu__my-info a {
+  color: var(--color-title-black);
+}
+
+.my-stay__item:first-child,
+.my-info__item:first-child {
+  font-size: 18px;
+  font-weight: var(--weight-medium);
+}
+
+.my-stay__item a.active {
+}
+
+.content__menu {
+  display: flex;
+}
+
+.content__item:first-child {
+  padding-right: 20px;
+  margin-right: 20px;
+  border-right: 1px solid var(--color-borderline-gray);
+}
+
+.content__item a {
+  font-family: var(--font-family-lato);
+  font-weight: var(--weight-light);
+  font-size: 18px;
+  color: var(--color-text-gray);
+}
+
+.content__item a.active {
+  font-weight: var(--weight-regular);
+  color: var(--color-black);
+}
+
+.content {
+  height: 100%;
+  margin-top: 30px;
+  border: 1px solid var(--color-text-black);
 }
 
 /* Footer */

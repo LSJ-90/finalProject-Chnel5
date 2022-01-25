@@ -39,7 +39,9 @@ body {
   font-family: var(--font-family-body);
 }
 
-a {
+a,
+a:hover,
+a:active {
   text-decoration: none;
 }
 
@@ -166,11 +168,11 @@ input::placeholder {
   max-width: 1400px;
 }
 
-.login__header {
+.section__header {
   margin: 70px 0;
 }
 
-.login__title {
+.section__title {
   font-family: var(--font-family-lato);
   font-weight: var(--weight-bold);
   font-size: 18px;
@@ -178,7 +180,7 @@ input::placeholder {
   text-indent: 14px;
 }
 
-.login__text {
+.section__text {
   font-size: 15px;
   font-weight: var(--weight-regular);
   margin-top: 10px;
